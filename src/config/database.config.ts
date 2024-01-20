@@ -1,5 +1,6 @@
 import { DataSource } from "typeorm";
 import { EnvConfiguration } from "./env.config";
+import { SnakeNamingStrategy } from "typeorm-naming-strategies";
 
 const AppDataSource = new DataSource({
   type: EnvConfiguration.DB_TYPE as "postgres",
@@ -11,7 +12,9 @@ const AppDataSource = new DataSource({
   entities: [`${__dirname}/../entities/*.entity.ts`],
   synchronize: true,
   logging: true,
+  namingStrategy: new SnakeNamingStrategy(),
   // path.join() , for windows
+  // dropSchema: true,
 });
 
 export { AppDataSource };
